@@ -48,7 +48,7 @@ def callback():
   response = youtube.subscriptions().list(part='snippet', mine=True, forChannelId='UCd92NIlxsFxKu3Zm2H3FNxg').execute() #자신의 채널 id를 넣으세요
   for hacc in response.get("items", []):
     if hacc["snippet"]["resourceId"]["kind"] == "youtube#channel":
-        return flask.redirect('https://drive.google.com/file/d/1H_p0HkNHvhitHySUCElAnXjPJn65wOSl/view') #버그판 링크
+        return flask.redirect('') #버그판 링크
   return "eesdf 유튜브 구독 안됨" #구독 안 했을때
 
 if __name__ == '__main__':
