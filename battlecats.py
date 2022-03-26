@@ -3,6 +3,7 @@ import os
 import flask
 import requests
 import ssl
+from flask import request
 
 import google.oauth2.credentials
 import google_auth_oauthlib.flow
@@ -50,6 +51,14 @@ def callback():
     if hacc["snippet"]["resourceId"]["kind"] == "youtube#channel":
         return flask.redirect('') #버그판 링크
   return "eesdf 유튜브 구독 안됨" #구독 안 했을때
+
+@app.before_request
+def before_request():
+    if request.url.startswith('http://'):
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
+
 
 if __name__ == '__main__':
   ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
